@@ -16,9 +16,18 @@ class BpmTools < Formula
   depends_on 'vorbis-tools' if build.with? 'bpm-tag'
 
   def install
-    system "make"
+    system 'make'
     bin.install 'bpm'
-    bin.install 'bpm-graph' if build.with? 'bpm-graph'
-    bin.install 'bpm-tag' if build.with? 'bpm-tag'
+    man.install 'bpm.1'
+
+    if build.with? 'bpm-graph'
+      bin.install 'bpm-graph'
+      man.install 'bpm-graph.1'
+    end
+
+    if build.with? 'bpm-tag'
+      bin.install 'bpm-tag'
+      man.install 'bpm-tag.1'
+    end
   end
 end
